@@ -24,3 +24,12 @@ h1{
   padding: 10px;
   border-radius:5px;
 }
+
+.divResponse, input{
+  margin: 10px;
+  border-radius:5px;
+  padding: 20px;
+}
+.divResponse{
+display:flex;
+}
