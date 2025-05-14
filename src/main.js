@@ -41,7 +41,38 @@ function createNumber(tamaño){
         }
 }
 
+//Crea el div con el input que vas a recibir
+function createInput(numerosRandom){
 
+
+let divNum= document.createElement("div")
+        divNum.style.backgroundColor= "antiquewhite"
+        divNum.style.borderRadius="12px"
+        divNum.style.padding="20px";
+        divNum.style.justifySelf= "center";
+        divNum.style.marginTop="40px";
+        divNum.style.fontSize="2rem";
+        divNum.id="divNewInput";
+        divNum.style.color="black";
+        document.body.appendChild(divNum);
+
+        let input= document.createElement("input")
+        input.style.backgroundColor= "antiquewhite"
+        input.style.borderRadius="12px"
+        input.style.padding="20px";
+        input.style.justifySelf= "center";
+        input.style.marginTop="40px";
+        input.style.fontSize="1.6rem";
+        input.id="inputJS";
+        
+        let newButton = document.createElement("button")
+        input.id="buttonVerificate";
+        newButton.innerText="Verificar Numeros"
+
+
+        divNum.appendChild(input);
+        divNum.appendChild(newButton);
+}
 
 //Crea el div con los numeros
 function createDiv(numerosRandom){
@@ -68,6 +99,8 @@ function timeShow(time){
 
                 let numDiv = document.getElementById("divJS")
                 numDiv.style.display="none"
+
+                createInput();
                 },time)
         }
         else{
@@ -75,7 +108,8 @@ function timeShow(time){
         }
 }
 
-
+function verifcarNum(listUser){
+}
 //Aqui añadimos el evento que escuchara si hacen click en el boton generar numeros y que puede
 numRandom.addEventListener("click", () =>{
   let tamañoLista = tamaño.value;
@@ -90,7 +124,7 @@ numRandom.addEventListener("click", () =>{
   }
 })
 
-
+        
 
 //El evento escuchara si se planea
 numMostrar.addEventListener("click", ()=>{
@@ -98,10 +132,12 @@ numMostrar.addEventListener("click", ()=>{
         if(exist()){
                 let numDiv = document.getElementById("divJS");
                 numDiv.style.display="block";
+                let listaRandom= numDiv.innerText
+                console.log(typeof listaRandom)
+                verifcarNum()
        }else{
                 alert("Primero debes generar los numeros")
         }
 
 })
-
 
