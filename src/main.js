@@ -21,9 +21,27 @@ function deleteDiv(){
       if(exist()){
         let exist = document.getElementById("divJS")
        document.body.removeChild(exist);
+        
     } 
 }
 
+//verifica si existe el div con el input y si existe lo elimina
+function existInput(){
+        let divInput = document.getElementById("divNewInput")
+        let result =false
+        if(divInput){
+                result =true
+        }
+        return result
+}
+
+function deleteInput(){
+if(existInput()){
+        let divInput = document.getElementById("divNewInput")
+        containerInput.removeChild(divInput);
+    } 
+}
+ 
 //Crea los numeros randoms
 function createNumber(tamaño){
   
@@ -45,7 +63,7 @@ function createNumber(tamaño){
 function createInput(numerosRandom){
 
 
-let divNum= document.createElement("div")
+        let divNum= document.createElement("div")
         divNum.style.backgroundColor= "antiquewhite"
         divNum.style.borderRadius="12px"
         divNum.style.padding="20px";
@@ -54,8 +72,7 @@ let divNum= document.createElement("div")
         divNum.style.fontSize="2rem";
         divNum.id="divNewInput";
         divNum.style.color="black";
-        document.body.appendChild(divNum);
-
+        
         let input= document.createElement("input")
         input.style.backgroundColor= "antiquewhite"
         input.style.borderRadius="12px"
@@ -66,12 +83,13 @@ let divNum= document.createElement("div")
         input.id="inputJS";
         
         let newButton = document.createElement("button")
-        input.id="buttonVerificate";
+        newButton.id="buttonVerificate";
         newButton.innerText="Verificar Numeros"
 
 
         divNum.appendChild(input);
         divNum.appendChild(newButton);
+        containerInput.appendChild(divNum);
 }
 
 //Crea el div con los numeros
@@ -99,7 +117,6 @@ function timeShow(time){
 
                 let numDiv = document.getElementById("divJS")
                 numDiv.style.display="none"
-
                 createInput();
                 },time)
         }
@@ -108,13 +125,25 @@ function timeShow(time){
         }
 }
 
-function verifcarNum(listUser){
+function verificate(listaRandom, listaUser){
+                console.log(listaUser)
+                console.log(listaRandom)
+         let numDiv = document.getElementById("divJS");
+        if(listaUser===listaRandom){
+                alert("Acertaste en todos los numeros")
+                                 numDiv.style.display="block";
+        }else{
+                alert("Fallaste, verifica tu errores")
+                 numDiv.style.display="block";
+        }
 }
+
 //Aqui añadimos el evento que escuchara si hacen click en el boton generar numeros y que puede
 numRandom.addEventListener("click", () =>{
   let tamañoLista = tamaño.value;
   let tiempoMuestra= time.value;
   deleteDiv();
+  deleteInput();
   let numerosRandom=createNumber(tamañoLista);
   if(numerosRandom!=null && tiempoMuestra!=""){
           createDiv(numerosRandom);
@@ -132,12 +161,23 @@ numMostrar.addEventListener("click", ()=>{
         if(exist()){
                 let numDiv = document.getElementById("divJS");
                 numDiv.style.display="block";
-                let listaRandom= numDiv.innerText
-                console.log(typeof listaRandom)
-                verifcarNum()
-       }else{
+               
+                
+       }else{ 
                 alert("Primero debes generar los numeros")
         }
 
 })
 
+let containerInput = document.getElementById('containerInput')
+containerInput.addEventListener('click', (clickButton)=>{
+        if(clickButton.target.tagName=== 'BUTTON'){
+                let numDiv = document.getElementById("divJS");
+                const div = clickButton.target.parentElement;
+                const input = div.querySelector('#inputJS');
+                const listaUser= input.value
+                const listaRandom=numDiv.innerText 
+                verificate(listaRandom, listaUser); 
+                
+        }
+})
